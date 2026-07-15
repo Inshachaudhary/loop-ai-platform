@@ -1,28 +1,77 @@
-import { ButtonHTMLAttributes } from "react";
-import clsx from "clsx";
+import Link from "next/link";
+import { ArrowRight, Play } from "lucide-react";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+type ButtonProps = {
+  children: React.ReactNode;
+  href?: string;
   variant?: "primary" | "secondary";
-}
+};
 
 export default function Button({
-  variant = "primary",
-  className,
   children,
-  ...props
+  href = "#",
+  variant = "primary",
 }: ButtonProps) {
+  if (variant === "secondary") {
+    return (
+      <Link
+        href={href}
+        className="
+          inline-flex
+          h-14
+          items-center
+          justify-center
+          gap-2
+          rounded-2xl
+          border
+          border-slate-200
+          bg-white
+          px-7
+          text-[16px]
+          font-semibold
+          text-slate-800
+          shadow-sm
+          transition-all
+          duration-300
+          hover:-translate-y-0.5
+          hover:border-blue-500
+          hover:shadow-lg
+        "
+      >
+        <Play size={16} strokeWidth={2.2} />
+        {children}
+      </Link>
+    );
+  }
+
   return (
-    <button
-      {...props}
-      className={clsx(
-        "inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold transition-all duration-200",
-        variant === "primary"
-          ? "bg-blue-600 text-white hover:bg-blue-700 shadow-md"
-          : "bg-white border border-gray-300 text-gray-800 hover:bg-gray-100",
-        className
-      )}
+    <Link
+      href={href}
+      className="
+        inline-flex
+        h-14
+        items-center
+        justify-center
+        gap-2
+        rounded-2xl
+        bg-gradient-to-r
+        from-blue-600
+        to-blue-500
+        px-8
+        text-[16px]
+        font-semibold
+        text-white
+        shadow-lg
+        shadow-blue-500/20
+        transition-all
+        duration-300
+        hover:-translate-y-1
+        hover:shadow-xl
+        hover:shadow-blue-500/30
+      "
     >
       {children}
-    </button>
+      <ArrowRight size={18} />
+    </Link>
   );
 }

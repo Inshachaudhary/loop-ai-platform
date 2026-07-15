@@ -2,24 +2,24 @@
 
 :root {
   /* Backgrounds */
-  --background: #f6f5f2;
+  --background: #f7f5f2;
   --surface: #ffffff;
-  --surface-muted: #f1f2f4;
+  --surface-secondary: #f2efe9;
 
   /* Text */
-  --text-primary: #1f2937;
-  --text-secondary: #6b7280;
+  --foreground: #171717;
+  --muted: #6b6b6b;
 
-  /* Border */
-  --border: #e5e7eb;
+  /* Borders */
+  --border: #e5e1da;
 
   /* Brand */
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
+  --primary: #5b4b3a;
+  --primary-hover: #47392b;
 
   /* Status */
-  --success: #16a34a;
-  --warning: #d97706;
+  --success: #15803d;
+  --warning: #b45309;
   --danger: #dc2626;
 
   /* Radius */
@@ -28,32 +28,32 @@
   --radius-lg: 22px;
 
   /* Shadow */
-  --shadow-sm: 0 4px 12px rgba(0,0,0,.04);
-  --shadow-md: 0 10px 30px rgba(0,0,0,.06);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.08);
 }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-html{
-  scroll-behavior:smooth;
+html {
+  scroll-behavior: smooth;
 }
 
-body{
-  background:var(--background);
-  color:var(--text-primary);
-  font-family:Inter,system-ui,sans-serif;
-  -webkit-font-smoothing:antialiased;
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-button{
-  cursor:pointer;
+button {
+  cursor: pointer;
 }
 
-a{
-  text-decoration:none;
-  color:inherit;
+a {
+  text-decoration: none;
+  color: inherit;
 }
