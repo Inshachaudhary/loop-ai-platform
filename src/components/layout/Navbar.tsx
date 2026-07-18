@@ -1,38 +1,30 @@
 "use client";
 
 import Link from "next/link";
-import {
-  ChevronDown,
-  ArrowRight,
-} from "lucide-react";
-
+import { ArrowRight, ChevronDown } from "lucide-react";
 import Container from "@/components/ui/Container";
 
 export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/80 backdrop-blur-xl">
-
       <Container>
+        <nav className="flex h-[72px] items-center justify-between">
 
-        <nav className="flex h-[84px] items-center justify-between">
+          {/* Logo */}
 
-          {/* LEFT */}
+          <Link href="/" className="flex items-center gap-3">
 
-          <Link
-            href="/"
-            className="flex items-center gap-4"
-          >
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-blue-500 text-xl font-bold text-white shadow-lg shadow-blue-500/20">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 text-sm font-bold text-white">
               L
             </div>
 
             <div>
 
-              <h2 className="text-[18px] font-bold tracking-tight text-slate-900">
-                LOOP AI
+              <h2 className="text-[17px] font-semibold tracking-tight text-slate-900">
+                LOOP
               </h2>
 
-              <p className="text-[15px] text-slate-500">
+              <p className="text-xs text-slate-500">
                 Customer Intelligence
               </p>
 
@@ -40,81 +32,64 @@ export default function Navbar() {
 
           </Link>
 
-          {/* CENTER */}
+          {/* Navigation */}
 
-          <ul className="hidden items-center gap-12 lg:flex">
+          <ul className="hidden lg:flex items-center gap-9">
 
-            <li>
-              <Link
-                href="#"
-                className="font-medium text-slate-700 transition hover:text-blue-600"
-              >
-                Platform
-              </Link>
-            </li>
+            {[
+              "Platform",
+              "Solutions",
+              "Resources",
+              "Pricing",
+            ].map((item) => (
 
-            <li>
-              <Link
-                href="#"
-                className="flex items-center gap-1 font-medium text-slate-700 transition hover:text-blue-600"
-              >
-                Solutions
+              <li key={item}>
 
-                <ChevronDown size={17} />
+                <Link
+                  href="#"
+                  className="flex items-center gap-1 text-[15px] font-medium text-slate-600 transition hover:text-slate-900"
+                >
 
-              </Link>
-            </li>
+                  {item}
 
-            <li>
-              <Link
-                href="#"
-                className="flex items-center gap-1 font-medium text-slate-700 transition hover:text-blue-600"
-              >
-                Resources
+                  {(item === "Solutions" ||
+                    item === "Resources") && (
+                    <ChevronDown size={16} />
+                  )}
 
-                <ChevronDown size={17} />
+                </Link>
 
-              </Link>
-            </li>
+              </li>
 
-            <li>
-              <Link
-                href="#"
-                className="font-medium text-slate-700 transition hover:text-blue-600"
-              >
-                Pricing
-              </Link>
-            </li>
+            ))}
 
           </ul>
 
-          {/* RIGHT */}
+          {/* Right */}
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
 
             <Link
               href="#"
-              className="inline-flex h-11 w-[92px] items-center justify-center rounded-xl border border-slate-200 bg-white text-[15px] font-semibold text-slate-700 transition-all duration-300 hover:border-blue-500 hover:text-blue-600"
+              className="flex h-10 items-center justify-center rounded-xl px-5 text-[15px] font-medium text-slate-700 transition hover:bg-slate-100"
             >
               Sign In
             </Link>
 
             <Link
               href="#"
-              className="inline-flex h-11 w-[160px] items-center justify-center gap-2 rounded-xl bg-blue-600 text-[15px] font-semibold text-white shadow-lg shadow-blue-600/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-700"
+              className="flex h-10 items-center gap-2 rounded-xl bg-slate-900 px-5 text-[15px] font-semibold text-white transition hover:bg-black"
             >
               Get Started
 
-              <ArrowRight size={18} />
+              <ArrowRight size={16} />
 
             </Link>
 
           </div>
 
         </nav>
-
       </Container>
-
     </header>
   );
 }

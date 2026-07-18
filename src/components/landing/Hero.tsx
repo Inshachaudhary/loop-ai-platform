@@ -1,5 +1,6 @@
 import Container from "@/components/ui/Container";
 import DashboardPreview from "./DashboardPreview";
+
 import {
   ArrowRight,
   Play,
