@@ -8,7 +8,7 @@ import {
   XAxis,
   Tooltip,
 } from "recharts";
-
+import AISummary from "@/components/dashboard/AISummary";
 import {
   ArrowUpRight,
   MessageSquare,
@@ -18,6 +18,7 @@ import {
   Sparkles,
   Clock3,
 } from "lucide-react";
+
 
 const chartData = [
   { month: "Jan", value: 420 },
@@ -297,6 +298,9 @@ export default function DashboardPreview() {
 
   </div>
 
+</div>
+<div className="mt-6">
+  <AISummary />
 </div>
 
 {/* AI Summary */}
