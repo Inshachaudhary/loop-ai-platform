@@ -1,50 +1,66 @@
+"use client";
+
 import {
-  AlertTriangle,
-  Smile,
+  Activity,
   MessageSquare,
-  CheckCircle2,
+  Smile,
+  TrendingUp,
 } from "lucide-react";
 
 import MetricCard from "./MetricCard";
 
+const metrics = [
+  {
+    title: "Overall Sentiment",
+    value: "84%",
+    change: "+6.4%",
+    trend: "up" as const,
+    description: "Customer sentiment improved compared to last week.",
+    icon: Smile,
+  },
+  {
+    title: "Feedback Received",
+    value: "12,486",
+    change: "+12.8%",
+    trend: "up" as const,
+    description: "Feedback collected across all connected channels.",
+    icon: MessageSquare,
+  },
+  {
+    title: "Recurring Themes",
+    value: "37",
+    change: "-4.1%",
+    trend: "down" as const,
+    description: "Frequently mentioned topics detected by AI.",
+    icon: Activity,
+  },
+  {
+    title: "Resolution Rate",
+    value: "91%",
+    change: "+3.2%",
+    trend: "up" as const,
+    description: "Customer issues resolved within the target SLA.",
+    icon: TrendingUp,
+  },
+];
+
 export default function DashboardGrid() {
   return (
-    <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-      <MetricCard
-        title="Critical Issues"
-        value="23"
-        change="+18%"
-        trend="up"
-        description="Billing failures increased this week."
-        icon={AlertTriangle}
-      />
-
-      <MetricCard
-        title="Customer Satisfaction"
-        value="91%"
-        change="-2%"
-        trend="down"
-        description="Slight decline compared to last week."
-        icon={Smile}
-      />
-
-      <MetricCard
-        title="New Feedback"
-        value="842"
-        change="+12%"
-        trend="up"
-        description="Collected from all channels."
-        icon={MessageSquare}
-      />
-
-      <MetricCard
-        title="Resolved Issues"
-        value="156"
-        change="+8%"
-        trend="up"
-        description="Successfully handled by the team."
-        icon={CheckCircle2}
-      />
+    <section
+      aria-label="Dashboard metrics"
+      className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4"
+    >
+      {metrics.map((metric) => (
+        <MetricCard
+          key={metric.title}
+          title={metric.title}
+          value={metric.value}
+          change={metric.change}
+          trend={metric.trend}
+          description={metric.description}
+          icon={metric.icon}
+        />
+      ))}
     </section>
   );
 }

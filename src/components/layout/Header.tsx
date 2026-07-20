@@ -1,77 +1,76 @@
 "use client";
 
-import { Bell, CalendarDays, Search } from "lucide-react";
+import {
+  Bell,
+  Menu,
+  Plus,
+  Search,
+} from "lucide-react";
 
-function getGreeting() {
-  const hour = new Date().getHours();
+type HeaderProps = {
+  onMenuClick?: () => void;
+};
 
-  if (hour < 12) return "Good Morning";
-  if (hour < 17) return "Good Afternoon";
-  return "Good Evening";
-}
-
-function getToday() {
-  return new Date().toLocaleDateString("en-US", {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-  });
-}
-
-export default function Header() {
+export default function Header({ onMenuClick }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-20 flex h-[72px] items-center justify-between border-b border-[var(--border)] bg-[var(--surface)] px-8">
+    <header className="sticky top-0 z-30 flex h-20 items-center justify-between border-b border-stone-200 bg-white px-6 lg:px-10">
       {/* Left */}
-      <div>
-        <h2 className="text-2xl font-semibold text-[var(--text-primary)]">
-          {getGreeting()}, Insha
-        </h2>
+      <div className="flex items-center gap-4">
+        <button
+          onClick={onMenuClick}
+          className="flex h-10 w-10 items-center justify-center rounded-xl border border-stone-200 text-stone-700 transition hover:bg-stone-100 lg:hidden"
+        >
+          <Menu size={20} />
+        </button>
 
-        <p className="mt-1 text-sm text-[var(--text-secondary)]">
-          {getToday()}
-        </p>
+        <div>
+          <h1 className="text-xl font-semibold tracking-tight text-stone-900">
+            Dashboard
+          </h1>
+
+          <p className="text-sm text-stone-500">
+            Customer feedback intelligence overview
+          </p>
+        </div>
       </div>
 
       {/* Right */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
         {/* Search */}
+        <div className="hidden md:flex">
+          <div className="flex h-11 w-80 items-center gap-3 rounded-xl border border-stone-200 bg-stone-50 px-4">
+            <Search
+              size={18}
+              className="text-stone-400"
+            />
 
-        <div className="flex w-80 items-center gap-3 rounded-xl border border-[var(--border)] bg-[var(--background)] px-4 py-2">
-          <Search
-            size={18}
-            className="text-[var(--text-secondary)]"
-          />
-
-          <input
-            placeholder="Search feedback..."
-            className="w-full bg-transparent text-sm outline-none placeholder:text-[var(--text-secondary)]"
-          />
+            <input
+              type="text"
+              placeholder="Search feedback..."
+              className="w-full bg-transparent text-sm text-stone-800 placeholder:text-stone-400 outline-none"
+            />
+          </div>
         </div>
 
         {/* Notification */}
-
-        <button className="rounded-xl border border-[var(--border)] bg-white p-3 transition hover:bg-[var(--background)]">
-          <Bell size={19} />
+        <button className="flex h-11 w-11 items-center justify-center rounded-xl border border-stone-200 transition hover:bg-stone-100">
+          <Bell
+            size={18}
+            className="text-stone-700"
+          />
         </button>
 
-        {/* Workspace */}
+        {/* New Report */}
+        <button className="hidden sm:flex h-11 items-center gap-2 rounded-xl bg-stone-900 px-4 text-sm font-medium text-white transition hover:bg-black">
+          <Plus size={16} />
 
-        <div className="flex items-center gap-3 rounded-xl border border-[var(--border)] bg-white px-4 py-2">
-          <CalendarDays
-            size={18}
-            className="text-[var(--primary)]"
-          />
+          New Report
+        </button>
 
-          <div>
-            <p className="text-sm font-medium text-[var(--text-primary)]">
-              Main Workspace
-            </p>
-
-            <p className="text-xs text-[var(--text-secondary)]">
-              Administrator
-            </p>
-          </div>
-        </div>
+        {/* Avatar */}
+        <button className="flex h-11 w-11 items-center justify-center rounded-full bg-stone-900 text-sm font-semibold text-white">
+          JC
+        </button>
       </div>
     </header>
   );

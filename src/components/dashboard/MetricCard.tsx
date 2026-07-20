@@ -1,18 +1,15 @@
-import {
-  ArrowDownRight,
-  ArrowUpRight,
-  LucideIcon,
-} from "lucide-react";
-import Card from "@/components/ui/Card";
+"use client";
 
-interface MetricCardProps {
+import { ArrowDownRight, ArrowUpRight, LucideIcon } from "lucide-react";
+
+type MetricCardProps = {
   title: string;
   value: string;
   change: string;
   trend: "up" | "down";
   description: string;
   icon: LucideIcon;
-}
+};
 
 export default function MetricCard({
   title,
@@ -25,49 +22,42 @@ export default function MetricCard({
   const positive = trend === "up";
 
   return (
-    <Card hover>
+    <article className="rounded-2xl border border-stone-200 bg-white p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm">
       <div className="flex items-start justify-between">
-        {/* Left Section */}
-        <div className="flex items-center gap-4">
-          <div className="rounded-xl bg-[var(--background)] p-3">
-            <Icon
-              size={20}
-              className="text-[var(--primary)]"
-            />
-          </div>
-
-          <div>
-            <p className="text-sm font-medium text-[var(--text-secondary)]">
-              {title}
-            </p>
-
-            <h3 className="mt-2 text-3xl font-semibold text-[var(--text-primary)]">
-              {value}
-            </h3>
-          </div>
+        <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-stone-200 bg-stone-50">
+          <Icon size={20} className="text-stone-700" />
         </div>
 
-        {/* Trend Badge */}
         <div
-          className={`flex items-center gap-1 rounded-full px-3 py-1 text-sm font-medium ${
+          className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium ${
             positive
-              ? "bg-green-50 text-green-700"
+              ? "bg-emerald-50 text-emerald-700"
               : "bg-red-50 text-red-700"
           }`}
         >
           {positive ? (
-            <ArrowUpRight size={16} />
+            <ArrowUpRight size={14} />
           ) : (
-            <ArrowDownRight size={16} />
+            <ArrowDownRight size={14} />
           )}
 
-          {change}
+          <span>{change}</span>
         </div>
       </div>
 
-      <p className="mt-5 text-sm leading-6 text-[var(--text-secondary)]">
-        {description}
-      </p>
-    </Card>
+      <div className="mt-6">
+        <p className="text-sm font-medium text-stone-500">
+          {title}
+        </p>
+
+        <h3 className="mt-2 text-3xl font-semibold tracking-tight text-stone-900">
+          {value}
+        </h3>
+
+        <p className="mt-2 text-sm leading-6 text-stone-500">
+          {description}
+        </p>
+      </div>
+    </article>
   );
 }
