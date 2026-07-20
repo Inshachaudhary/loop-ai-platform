@@ -1,18 +1,22 @@
-import { cn } from "@/lib/utils";
+import { ReactNode } from "react";
+import clsx from "clsx";
 
-type CardProps = {
-  children: React.ReactNode;
+interface CardProps {
+  children: ReactNode;
   className?: string;
-};
+  hover?: boolean;
+}
 
 export default function Card({
   children,
-  className = "",
+  className,
+  hover = false,
 }: CardProps) {
   return (
     <div
-      className={cn(
-        "rounded-3xl border border-stone-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl",
+      className={clsx(
+        "rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm transition-all duration-200",
+        hover && "hover:-translate-y-1 hover:shadow-md",
         className
       )}
     >
