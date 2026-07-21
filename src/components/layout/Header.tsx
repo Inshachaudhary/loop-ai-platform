@@ -1,77 +1,169 @@
 "use client";
 
+import { useMemo } from "react";
+import { usePathname } from "next/navigation";
 import {
   Bell,
-  Menu,
-  Plus,
   Search,
+  Plus,
+  ChevronRight,
+  Command,
 } from "lucide-react";
 
-type HeaderProps = {
-  onMenuClick?: () => void;
+const pageTitles: Record<string, string> = {
+  "/dashboard": "Dashboard",
+  "/analytics": "Analytics",
+  "/feedback": "Customer Feedback",
+  "/reports": "Reports",
+  "/ai": "AI Insights",
+  "/settings": "Settings",
 };
 
-export default function Header({ onMenuClick }: HeaderProps) {
+export default function Header() {
+  const pathname = usePathname();
+
+  const pageTitle = useMemo(() => {
+    return pageTitles[pathname] ?? "Dashboard";
+  }, [pathname]);
+
+  const today = new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
   return (
-    <header className="sticky top-0 z-30 flex h-20 items-center justify-between border-b border-stone-200 bg-white px-6 lg:px-10">
+    <header className="sticky top-0 z-40 flex h-20 items-center justify-between border-b border-[var(--border)] bg-[var(--surface)] px-10">
+
       {/* Left */}
-      <div className="flex items-center gap-4">
+
+      <div className="flex flex-col">
+
+        <div className="flex items-center gap-2 text-sm text-[var(--text-muted)]">
+
+          <span>Workspace</span>
+
+          <ChevronRight size={15} />
+
+          <span>{pageTitle}</span>
+
+        </div>
+
+        <h1 className="mt-2 text-3xl font-semibold tracking-tight text-[var(--text-primary)]">
+          {pageTitle}
+        </h1>
+
+      </div>
+
+      {/* Search */}
+
+      <div className="mx-12 flex flex-1 justify-center">
+
         <button
-          onClick={onMenuClick}
-          className="flex h-10 w-10 items-center justify-center rounded-xl border border-stone-200 text-stone-700 transition hover:bg-stone-100 lg:hidden"
+          className="
+          flex
+          h-12
+          w-full
+          max-w-xl
+          items-center
+          justify-between
+          rounded-2xl
+          border
+          border-[var(--border)]
+          bg-[var(--surface-elevated)]
+          px-4
+          transition-all
+          duration-200
+          hover:border-[var(--border-strong)]
+          "
         >
-          <Menu size={20} />
+          <div className="flex items-center gap-3">
+
+            <Search
+              size={18}
+              className="text-[var(--text-muted)]"
+            />
+
+            <span className="text-sm text-[var(--text-muted)]">
+              Search feedback, reports or customers...
+            </span>
+
+          </div>
+
+          <div className="flex items-center gap-1 rounded-lg border border-[var(--border)] bg-white px-2 py-1 text-xs text-[var(--text-muted)]">
+
+            <Command size={12} />
+
+            <span>K</span>
+
+          </div>
+
         </button>
 
-        <div>
-          <h1 className="text-xl font-semibold tracking-tight text-stone-900">
-            Dashboard
-          </h1>
-
-          <p className="text-sm text-stone-500">
-            Customer feedback intelligence overview
-          </p>
-        </div>
       </div>
 
       {/* Right */}
-      <div className="flex items-center gap-3">
-        {/* Search */}
-        <div className="hidden md:flex">
-          <div className="flex h-11 w-80 items-center gap-3 rounded-xl border border-stone-200 bg-stone-50 px-4">
-            <Search
-              size={18}
-              className="text-stone-400"
-            />
 
-            <input
-              type="text"
-              placeholder="Search feedback..."
-              className="w-full bg-transparent text-sm text-stone-800 placeholder:text-stone-400 outline-none"
-            />
-          </div>
-        </div>
+      <div className="flex items-center gap-4">
 
-        {/* Notification */}
-        <button className="flex h-11 w-11 items-center justify-center rounded-xl border border-stone-200 transition hover:bg-stone-100">
-          <Bell
-            size={18}
-            className="text-stone-700"
-          />
+        <button
+          className="
+          flex
+          h-11
+          w-11
+          items-center
+          justify-center
+          rounded-xl
+          border
+          border-[var(--border)]
+          bg-white
+          transition
+          hover:border-[var(--border-strong)]
+          hover:bg-[var(--surface-hover)]
+          "
+        >
+          <Bell size={18} />
         </button>
 
-        {/* New Report */}
-        <button className="hidden sm:flex h-11 items-center gap-2 rounded-xl bg-stone-900 px-4 text-sm font-medium text-white transition hover:bg-black">
-          <Plus size={16} />
+        <button
+          className="
+          flex
+          h-11
+          items-center
+          gap-2
+          rounded-xl
+          bg-black
+          px-5
+          text-sm
+          font-medium
+          text-white
+          transition
+          hover:opacity-90
+          "
+        >
+          <Plus size={18} />
 
           New Report
         </button>
+                <div className="flex items-center gap-3 rounded-2xl border border-[var(--border)] bg-white px-3 py-2 transition hover:border-[var(--border-strong)]">
+          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-black text-sm font-semibold text-white">
+            IC
+          </div>
 
-        {/* Avatar */}
-        <button className="flex h-11 w-11 items-center justify-center rounded-full bg-stone-900 text-sm font-semibold text-white">
-          JC
-        </button>
+          <div className="flex flex-col text-left">
+            <span className="text-sm font-semibold text-[var(--text-primary)]">
+              Insha Chaudhary
+            </span>
+
+            <span className="text-xs text-[var(--text-muted)]">
+              Product Admin
+            </span>
+          </div>
+        </div>
+
       </div>
+
     </header>
   );
 }
