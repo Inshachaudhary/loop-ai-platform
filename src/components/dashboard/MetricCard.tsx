@@ -1,15 +1,17 @@
 "use client";
 
-import { ArrowDownRight, ArrowUpRight, LucideIcon } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight } from "lucide-react";
+import { ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
-type MetricCardProps = {
+interface MetricCardProps {
   title: string;
   value: string;
   change: string;
   trend: "up" | "down";
   description: string;
-  icon: LucideIcon;
-};
+  icon: ReactNode;
+}
 
 export default function MetricCard({
   title,
@@ -17,47 +19,60 @@ export default function MetricCard({
   change,
   trend,
   description,
-  icon: Icon,
+  icon,
 }: MetricCardProps) {
-  const positive = trend === "up";
-
   return (
-    <article className="rounded-2xl border border-stone-200 bg-white p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm">
-      <div className="flex items-start justify-between">
-        <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-stone-200 bg-stone-50">
-          <Icon size={20} className="text-stone-700" />
+    <div
+      className={cn(
+        "group rounded-3xl border border-[var(--border)] bg-white p-6 shadow-sm transition-all duration-300",
+        "hover:-translate-y-1 hover:border-[var(--border-strong)] hover:shadow-lg"
+      )}
+    >
+      <div className="mb-6 flex items-center justify-between">
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--surface-hover)]">
+          {icon}
         </div>
 
         <div
-          className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium ${
-            positive
-              ? "bg-emerald-50 text-emerald-700"
+          className={cn(
+            "flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold",
+            trend === "up"
+              ? "bg-green-50 text-green-700"
               : "bg-red-50 text-red-700"
-          }`}
+          )}
         >
-          {positive ? (
+          {trend === "up" ? (
             <ArrowUpRight size={14} />
           ) : (
             <ArrowDownRight size={14} />
           )}
 
-          <span>{change}</span>
+          {change}
         </div>
       </div>
 
-      <div className="mt-6">
-        <p className="text-sm font-medium text-stone-500">
-          {title}
-        </p>
+      <p className="text-sm font-medium text-[var(--text-muted)]">
+        {title}
+      </p>
 
-        <h3 className="mt-2 text-3xl font-semibold tracking-tight text-stone-900">
-          {value}
-        </h3>
+      <h2 className="mt-2 text-4xl font-bold tracking-tight text-[var(--text-primary)]">
+        {value}
+      </h2>
 
-        <p className="mt-2 text-sm leading-6 text-stone-500">
-          {description}
-        </p>
+      <p className="mt-3 text-sm leading-6 text-[var(--text-secondary)]">
+        {description}
+      </p>
+
+      <div className="mt-6 h-2 overflow-hidden rounded-full bg-[var(--surface-hover)]">
+        <div
+          className={cn(
+            "h-full rounded-full transition-all duration-500 group-hover:w-full",
+            trend === "up"
+              ? "w-4/5 bg-green-500"
+              : "w-2/5 bg-red-500"
+          )}
+        />
       </div>
-    </article>
+    </div>
   );
 }
