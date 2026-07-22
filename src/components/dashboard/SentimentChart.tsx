@@ -1,52 +1,48 @@
 "use client";
 
 import {
-  Area,
-  AreaChart,
-  CartesianGrid,
   ResponsiveContainer,
-  Tooltip,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
+  CartesianGrid,
+  Tooltip,
 } from "recharts";
-import { TrendingUp } from "lucide-react";
 
 const data = [
-  { day: "Mon", positive: 74, negative: 16 },
-  { day: "Tue", positive: 79, negative: 13 },
-  { day: "Wed", positive: 76, negative: 15 },
-  { day: "Thu", positive: 82, negative: 11 },
-  { day: "Fri", positive: 85, negative: 9 },
-  { day: "Sat", positive: 83, negative: 10 },
-  { day: "Sun", positive: 88, negative: 8 },
+  { day: "Jun 22", positive: 72, neutral: 25, negative: 8 },
+  { day: "Jun 29", positive: 76, neutral: 28, negative: 6 },
+  { day: "Jul 6", positive: 73, neutral: 24, negative: 7 },
+  { day: "Jul 13", positive: 79, neutral: 24, negative: 5 },
+  { day: "Jul 20", positive: 83, neutral: 25, negative: 4 },
 ];
 
 export default function SentimentChart() {
   return (
-    <div className="rounded-3xl border border-[var(--border)] bg-white p-7 shadow-sm">
+    <section className="rounded-3xl border border-[var(--border)] bg-white p-6 shadow-sm">
 
-      <div className="mb-8 flex items-center justify-between">
+      {/* Header */}
+
+      <div className="mb-6 flex items-center justify-between">
 
         <div>
-
-          <p className="text-sm font-medium text-[var(--text-muted)]">
+          <h3 className="text-xl font-semibold">
             Sentiment Trend
+          </h3>
+
+          <p className="mt-1 text-sm text-[var(--text-muted)]">
+            Weekly customer sentiment
           </p>
-
-          <h2 className="mt-2 text-2xl font-semibold tracking-tight">
-            Weekly Customer Sentiment
-          </h2>
-
         </div>
 
-        <div className="flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700">
-          <TrendingUp size={16} />
-          +8.4%
-        </div>
+        <button className="rounded-xl border border-[var(--border)] px-4 py-2 text-sm">
+          Weekly
+        </button>
 
       </div>
 
-      <div className="h-[340px]">
+      <div className="h-[320px]">
 
         <ResponsiveContainer width="100%" height="100%">
 
@@ -55,21 +51,27 @@ export default function SentimentChart() {
             <defs>
 
               <linearGradient id="positive" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#22c55e" stopOpacity={0.35} />
-                <stop offset="100%" stopColor="#22c55e" stopOpacity={0.02} />
+
+                <stop offset="5%" stopColor="#22C55E" stopOpacity={0.30} />
+
+                <stop offset="95%" stopColor="#22C55E" stopOpacity={0} />
+
               </linearGradient>
 
               <linearGradient id="negative" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#ef4444" stopOpacity={0.25} />
-                <stop offset="100%" stopColor="#ef4444" stopOpacity={0.02} />
+
+                <stop offset="5%" stopColor="#EF4444" stopOpacity={0.20} />
+
+                <stop offset="95%" stopColor="#EF4444" stopOpacity={0} />
+
               </linearGradient>
 
             </defs>
 
             <CartesianGrid
+              stroke="#ECECEC"
               strokeDasharray="4 4"
               vertical={false}
-              stroke="#ECECEC"
             />
 
             <XAxis
@@ -83,25 +85,20 @@ export default function SentimentChart() {
               axisLine={false}
             />
 
-            <Tooltip
-              contentStyle={{
-                borderRadius: 16,
-                border: "1px solid #E5E7EB",
-                boxShadow:
-                  "0 10px 30px rgba(0,0,0,.08)",
-              }}
-            />
+            <Tooltip />
 
             <Area
+              type="monotone"
               dataKey="positive"
-              stroke="#22c55e"
+              stroke="#22C55E"
               fill="url(#positive)"
               strokeWidth={3}
             />
 
             <Area
+              type="monotone"
               dataKey="negative"
-              stroke="#ef4444"
+              stroke="#EF4444"
               fill="url(#negative)"
               strokeWidth={3}
             />
@@ -112,6 +109,6 @@ export default function SentimentChart() {
 
       </div>
 
-    </div>
+    </section>
   );
 }

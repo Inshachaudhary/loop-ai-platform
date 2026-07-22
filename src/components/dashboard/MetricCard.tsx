@@ -1,7 +1,11 @@
 "use client";
 
-import { ArrowDownRight, ArrowUpRight } from "lucide-react";
-import { ReactNode } from "react";
+import {
+  ArrowDownRight,
+  ArrowUpRight,
+  LucideIcon,
+} from "lucide-react";
+
 import { cn } from "@/lib/utils";
 
 interface MetricCardProps {
@@ -10,7 +14,7 @@ interface MetricCardProps {
   change: string;
   trend: "up" | "down";
   description: string;
-  icon: ReactNode;
+  icon: LucideIcon;
 }
 
 export default function MetricCard({
@@ -19,7 +23,7 @@ export default function MetricCard({
   change,
   trend,
   description,
-  icon,
+  icon: Icon,
 }: MetricCardProps) {
   return (
     <div
@@ -29,9 +33,12 @@ export default function MetricCard({
       )}
     >
       <div className="mb-6 flex items-center justify-between">
-        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--surface-hover)]">
-          {icon}
-        </div>
+       <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--surface-hover)]">
+  <Icon
+    size={22}
+    strokeWidth={2}
+  />
+</div>
 
         <div
           className={cn(

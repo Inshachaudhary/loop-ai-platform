@@ -27,76 +27,60 @@ export default function Header() {
   }, [pathname]);
 
   const today = new Date().toLocaleDateString("en-US", {
-    weekday: "long",
+    weekday: "short",
     day: "numeric",
-    month: "long",
-    year: "numeric",
+    month: "short",
   });
 
   return (
-    <header className="sticky top-0 z-40 flex h-20 items-center justify-between border-b border-[var(--border)] bg-[var(--surface)] px-10">
+    <header className="sticky top-0 z-30 flex h-[72px] items-center justify-between border-b border-[var(--border)] bg-white px-8">
 
       {/* Left */}
 
       <div className="flex flex-col">
 
-        <div className="flex items-center gap-2 text-sm text-[var(--text-muted)]">
-
+        <div className="flex items-center gap-2 text-xs font-medium text-[var(--text-muted)]">
           <span>Workspace</span>
-
-          <ChevronRight size={15} />
-
+          <ChevronRight size={13} />
           <span>{pageTitle}</span>
-
         </div>
 
-        <h1 className="mt-2 text-3xl font-semibold tracking-tight text-[var(--text-primary)]">
-          {pageTitle}
-        </h1>
+        <div className="mt-1 flex items-center gap-3">
+
+          <h1 className="text-[28px] font-semibold tracking-tight text-[var(--text-primary)]">
+            {pageTitle}
+          </h1>
+
+          <span className="rounded-full bg-[#F4F4F5] px-3 py-1 text-xs font-medium text-[var(--text-secondary)]">
+            {today}
+          </span>
+
+        </div>
 
       </div>
 
       {/* Search */}
 
-      <div className="mx-12 flex flex-1 justify-center">
+      <div className="mx-8 flex flex-1 justify-center">
 
-        <button
-          className="
-          flex
-          h-12
-          w-full
-          max-w-xl
-          items-center
-          justify-between
-          rounded-2xl
-          border
-          border-[var(--border)]
-          bg-[var(--surface-elevated)]
-          px-4
-          transition-all
-          duration-200
-          hover:border-[var(--border-strong)]
-          "
-        >
+        <button className="flex h-11 w-full max-w-lg items-center justify-between rounded-xl border border-[var(--border)] bg-[#FAFAFA] px-4 transition hover:border-[var(--border-strong)]">
+
           <div className="flex items-center gap-3">
 
             <Search
-              size={18}
+              size={17}
               className="text-[var(--text-muted)]"
             />
 
             <span className="text-sm text-[var(--text-muted)]">
-              Search feedback, reports or customers...
+              Search...
             </span>
 
           </div>
 
-          <div className="flex items-center gap-1 rounded-lg border border-[var(--border)] bg-white px-2 py-1 text-xs text-[var(--text-muted)]">
-
-            <Command size={12} />
-
-            <span>K</span>
-
+          <div className="flex items-center gap-1 rounded-lg border border-[var(--border)] bg-white px-2 py-1 text-[11px] text-[var(--text-muted)]">
+            <Command size={11} />
+            K
           </div>
 
         </button>
@@ -105,62 +89,41 @@ export default function Header() {
 
       {/* Right */}
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
 
-        <button
-          className="
-          flex
-          h-11
-          w-11
-          items-center
-          justify-center
-          rounded-xl
-          border
-          border-[var(--border)]
-          bg-white
-          transition
-          hover:border-[var(--border-strong)]
-          hover:bg-[var(--surface-hover)]
-          "
-        >
+        <button className="flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--border)] bg-white transition hover:bg-[#F8F8F8]">
+
           <Bell size={18} />
+
         </button>
 
-        <button
-          className="
-          flex
-          h-11
-          items-center
-          gap-2
-          rounded-xl
-          bg-black
-          px-5
-          text-sm
-          font-medium
-          text-white
-          transition
-          hover:opacity-90
-          "
-        >
-          <Plus size={18} />
+        <button className="flex h-10 items-center gap-2 rounded-xl bg-[#18181B] px-4 text-sm font-medium text-white transition hover:bg-black">
 
-          New Report
+          <Plus size={16} />
+
+          New
+
         </button>
-                <div className="flex items-center gap-3 rounded-2xl border border-[var(--border)] bg-white px-3 py-2 transition hover:border-[var(--border-strong)]">
-          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-black text-sm font-semibold text-white">
+
+        <button className="flex items-center gap-3 rounded-xl border border-[var(--border)] bg-white px-3 py-2 transition hover:border-[var(--border-strong)]">
+
+          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#18181B] text-sm font-semibold text-white">
             IC
           </div>
 
-          <div className="flex flex-col text-left">
-            <span className="text-sm font-semibold text-[var(--text-primary)]">
-              Insha Chaudhary
-            </span>
+          <div className="text-left">
 
-            <span className="text-xs text-[var(--text-muted)]">
-              Product Admin
-            </span>
+            <p className="text-sm font-semibold">
+              Insha
+            </p>
+
+            <p className="text-xs text-[var(--text-muted)]">
+              Administrator
+            </p>
+
           </div>
-        </div>
+
+        </button>
 
       </div>
 

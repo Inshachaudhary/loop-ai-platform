@@ -1,42 +1,18 @@
-import ExecutiveSummary from "@/components/dashboard/ExecutiveSummary";
-import StatsGrid from "@/components/dashboard/StatsGrid";
-import SentimentChart from "@/components/dashboard/SentimentChart";
-import AIInsights from "@/components/dashboard/AIInsights";
+import DashboardHero from "@/components/dashboard/DashboardHero";
+import DashboardFilters from "@/components/dashboard/DashboardFilters";
+import DashboardGrid from "@/components/dashboard/DashboardGrid";
+import DashboardBottom from "@/components/dashboard/DashboardBottom";
 
 export default function DashboardPage() {
   return (
-    <div className="space-y-8">
-      <ExecutiveSummary />
+    <div className="space-y-6">
+      <DashboardHero />
 
-      <StatsGrid />
+      <DashboardFilters />
 
-      <div className="grid gap-8 xl:grid-cols-3">
-        <section className="xl:col-span-2">
-          <div className="flex h-[420px] items-center justify-center rounded-3xl border border-[var(--border)] bg-white shadow-sm">
-            <p className="text-[var(--text-muted)]">
-              Sentiment Chart (Coming Next)
-            </p>
-          </div>
-        </section>
+      <DashboardGrid />
 
-        <section>
-          <AIInsights />
-        </section>
-      </div>
-
-      <div className="grid gap-8 xl:grid-cols-5">
-        <section className="xl:col-span-3">
-          <div className="flex h-[420px] items-center justify-center rounded-3xl border border-[var(--border)] bg-white shadow-sm">
-            <p className="text-[var(--text-muted)]">
-              Recent Feedback Table (Coming Next)
-            </p>
-          </div>
-        </section>
-
-        <section className="xl:col-span-2">
-         <SentimentChart />
-        </section>
-      </div>
+      <DashboardBottom />
     </div>
   );
 }
